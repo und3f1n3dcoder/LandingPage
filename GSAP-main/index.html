@@ -1,329 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GSAP</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body>
-    <nav class="bg-gray-800">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button-->
-                    <button type="button"
-                        class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="absolute -inset-0.5"></span>
-                        <span class="sr-only">Open main menu</span>
-                        <!--
-                  Icon when menu is closed.
-      
-                  Menu open: "hidden", Menu closed: "block"
-                -->
-                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <!--
+  <body>
+    <nav class="bg-gray-800 fixed w-full z-[1]">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              id="mobile-menu-button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="block h-6 w-6"
+                id="menu-open"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
                   Icon when menu is open.
       
                   Menu open: "block", Menu closed: "hidden"
                 -->
-                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-
-                    <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <span class="font-semibold mt-1 text-xl text-white">DeCram AI</span>
-                            <a href="http://localhost:5173"
-                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-                                aria-current="page">Dashboard</a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
-
-                    <!-- Profile dropdown -->
-                    <div class="relative ml-3">
-                        <div>
-                            <!-- <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" > -->
-                            <span class="absolute -inset-1.5"></span>
-                            <span class="sr-only">Open user menu</span>
-                            <img class="h-8 w-8 rounded-full"
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt="">
-                            </button>
-                        </div>
-
-                        <!--
-                  Dropdown menu, show/hide based on menu state.
-      
-                  Entering: "transition ease-out duration-100"
-                    From: "transform opacity-0 scale-95"
-                    To: "transform opacity-100 scale-100"
-                  Leaving: "transition ease-in duration-75"
-                    From: "transform opacity-100 scale-100"
-                    To: "transform opacity-0 scale-95"
-                -->
-
-                    </div>
-                </div>
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <span class="font-semibold mt-1 text-xl text-white"
+                  >DeCram AI</span
+                >
+                <a
+                  href="http://localhost:5173"
+                  class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  aria-current="page"
+                  >Dashboard</a
+                >
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pb-3 pt-2">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="http://localhost:5173"
-                    class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                    aria-current="page">Dashboard</a>
-
-            </div>
+      <!-- Mobile menu -->
+      <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <a
+            href="http://localhost:5173"
+            class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            aria-current="page"
+            >Dashboard</a
+          >
         </div>
+      </div>
     </nav>
 
     <section class="bg-gray-900 text-white">
+      <div class="relative">
+        <!-- <div class="hawk-tuah absolute -top-20 -left-20 w-[400px] h-[400px] bg-gradient-to-br from-purple-600 via-blue-500 to-teal-400 opacity-30 rounded-full blur-3xl"></div> -->
         <div
-            class="hawk-tuah z-[-1] absolute -top-20 -left-20 w-[400px] h-[400px] bg-gradient-to-br from-purple-600 via-blue-500 to-teal-400 opacity-70 rounded-full blur-3xl">
-        </div>
+          class="hawk-tuah absolute top-[30%] -left-20 w-[400px] h-[400px] bg-gradient-to-br from-purple-600 via-blue-500 to-teal-400 opacity-30 rounded-full blur-3xl"
+        ></div>
         <div
-            class="hawk-tuah absolute top-[30%] -left-20 w-[400px] h-[400px] bg-gradient-to-br from-purple-600 via-blue-500 to-teal-400 opacity-70 rounded-full blur-3xl">
-        </div>
+          class="hawk-tuah absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-pink-500 opacity-30 rounded-full blur-3xl"
+        ></div>
         <div
-            class="hawk-tuah absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-pink-500 opacity-60 rounded-full blur-3xl">
-        </div>
-        <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
-            <div class="mx-auto max-w-3xl text-center ">
-                <h1
-                    class="demo bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
-                    Learn, Generate, Succeed
-                    <span class="sm:block "> AI-Powered Solutions.
-
-                    </span>
-                </h1>
-
-                <p class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed demo">
-                    Unlock your potential with DeCram AI—generate worksheets, get instant grades, and resolve doubts
-                    effortlessly with our intelligent support system. Start learning smarter today!
-                </p>
-
-                <div class="demo mt-8 flex flex-wrap justify-center gap-4">
-                    <a class="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
-                        href="http://localhost:5173">
-                        Get Started
-                    </a>
-
-                    <a class="block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-                        href="#">
-                        Learn More
-                    </a>
-                </div>
+          class="relative mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"
+        >
+          <div class="mx-auto max-w-3xl text-center">
+            <h1
+              class="demo bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+            >
+              Learn, Generate, Succeed
+              <span class="sm:block">AI-Powered Solutions</span>
+            </h1>
+            <p
+              class="opacity-90 mx-auto mt-4 max-w-xl sm:text-xl/relaxed demo text-gray-100 bg-gray-900 bg-opacity-80 p-4 rounded-lg"
+            >
+              Unlock your potential with DeCram AI—generate worksheets, get
+              instant grades, and resolve doubts effortlessly with our
+              intelligent support system. Start learning smarter today!
+            </p>
+            <div class="demo mt-8 flex flex-wrap justify-center gap-4">
+              <a
+                class="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                href="http://localhost:5173"
+                >Get Started</a
+              >
+              <a
+                class="block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                href="#learn-more"
+                >Try Now Without Login</a
+              >
             </div>
+          </div>
         </div>
+      </div>
     </section>
-    <link href="https://unpkg.com/pattern.css" rel="stylesheet">
-
-    <div>
-        <section class="text-gray-200 bg-gray-900 overflow-x-hidden pr-2">
-            <div class=" max-w-6xl mx-auto px-5 py-24 ">
-                <div class=" text-center mb-20 ">
-                    <h1
-                        class="demo1 title-font  mb-4 text-4xl font-extrabold leading-10 tracking-tight sm:text-5xl sm:leading-none md:text-6xl">
-                        Our Services</h1>
-                    <p class="demo1 text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">Discover DeCram AI&apos;s suite
-                        of services: generate customized worksheets, receive instant grading feedback, and tackle your
-                        doubts with our AI-driven solutions. Tailored learning has never been easier—boost your
-                        confidence and understanding with our innovative tools designed to enhance your study
-                        experience!</p>
-                    <div class=" flex mt-6 justify-center">
-                        <div class=" w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
-                    </div>
+    <link href="https://unpkg.com/pattern.css" rel="stylesheet" />
+    <section class="text-gray-200 bg-gray-900 overflow-x-hidden pr-2">
+      <div class="demo1 max-w-6xl mx-auto px-5 py-24">
+        <div class="text-center mb-20">
+          <h1
+            class="demo1 title-font mb-4 text-4xl font-extrabold leading-10 tracking-tight sm:text-5xl sm:leading-none md:text-6xl"
+          >
+            Our Services
+          </h1>
+          <p class="demo1 text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+            Discover DeCram AI's suite of services: generate customized
+            worksheets, receive instant grading feedback, and tackle your doubts
+            with our AI-driven solutions. Tailored learning has never been
+            easier—boost your confidence and understanding with our innovative
+            tools designed to enhance your study experience!
+          </p>
+          <div class="flex mt-6 justify-center">
+            <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+          </div>
+        </div>
+        <div class="demo1 flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+          <div
+            class="p-4 sm:p-6 md:p-10 w-full md:w-1/3 md:mb-0 mb-6 flex flex-col"
+          >
+            <div class="pattern-dots-md gray-light">
+              <div
+                class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6"
+              >
+                <div
+                  class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 mb-5 flex-shrink-0 p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+                    />
+                  </svg>
                 </div>
-                <div class="demo1 flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 ">
-                    <div class=" p-4 sm:p-6 md:p-10 w-full md:w-1/3 md:mb-0 mb-6 flex flex-col ">
-                        <div class=" pattern-dots-md gray-light">
-                            <div class=" rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6  ">
-                                <div
-                                    class=" w-10 h-10 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 mb-5 flex-shrink-0 p-2">
-                                    <svg class="  w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class=" flex-grow min-h-[22vh]">
-                                    <h2 class=" text-xl title-font font-medium mb-3"> Custom Worksheet Generation</h2>
-                                    <p class=" leading-relaxed text-sm text-justify">Create personalized worksheets
-                                        tailored to your curriculum and learning needs, making study sessions more
-                                        effective and engaging.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" p-4 sm:p-6 md:p-10 w-full md:w-1/3 md:mb-0 mb-6 flex flex-col ">
-                        <div class="pattern-dots-md gray-light">
-                            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6 ">
-                                <div
-                                    class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-5 flex-shrink-0">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                                    </svg>
-                                </div>
-                                <div class="flex-grow min-h-[22vh]">
-                                    <h2 class=" text-xl title-font font-medium mb-3">Instant Grading System
-                                    </h2>
-                                    <p class=" leading-relaxed text-sm text-justify">
-                                        Get immediate feedback on your answers, helping you identify areas for
-                                        improvement and track your progress in real time.
-
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 sm:p-6 md:p-10 w-full md:w-1/3 md:mb-0 mb-6 flex flex-col ">
-                        <div class="pattern-dots-md gray-light">
-                            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6 ">
-                                <div
-                                    class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class=" flex-grow min-h-[22vh]">
-                                    <h2 class=" text-xl title-font font-medium mb-3">Doubt Assistance</h2>
-                                    <p class=" leading-relaxed text-sm text-justify">
-                                        Receive instant, AI-generated solutions to your questions, ensuring you stay on
-                                        track and fully understand your study material.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-        </section>
-        <!-- component -->
-        <footer class="relative py-12 sm:py-16 md:py-20 flex flex-col items-center bg-cyan-900 overflow-hidden">
-            <div class="footer1 relative z-[1] container m-auto px-4 sm:px-6 md:px-12">
-                <div class="m-auto md:w-10/12 lg:w-8/12 xl:w-6/12">
-                    <div class="flex flex-col sm:flex-row items-center justify-between md:flex-nowrap gap-8">
-                        <div class="w-full space-x-4 sm:space-x-8 flex justify-center text-gray-300 sm:w-7/12 md:justify-start">
-                            <!-- <ul class="list-disc list-inside space-y-8">
-                                <li><a href="#" class="hover:text-sky-400 transition">Home</a></li>
-
-                                <li><a href="#" class="hover:text-sky-400 transition">About</a></li>
-                                <li><a href="#" class="hover:text-sky-400 transition">Guide</a></li>
-                                <li><a href="#" class="hover:text-sky-400 transition">Blocks</a></li>
-                                <li><a href="#" class="hover:text-sky-400 transition">Contact</a></li>
-                                <li><a href="#" class="hover:text-sky-400 transition">Terms of Use</a></li>
-                            </ul> -->
-
-                            <ul role="list" class="space-y-8">
-                                <li>
-                                    <a href="https://github.com/und3f1n3dcoder"
-                                        class="flex items-center space-x-3 hover:text-sky-400 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                                        </svg>
-                                        <span>Github</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://x.com/elonmusk"
-                                        class="flex items-center space-x-3 hover:text-sky-400 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-                                        </svg>
-                                        <span>Twitter</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.youtube.com/@anonyone_op"
-                                        class="flex items-center space-x-3 hover:text-sky-400 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
-                                        </svg>
-                                        <span>YouTube</span>
-                                    </a>
-                                </li>
-
-
-
-
-
-                                <li>
-                                    <a href="https://www.instagram.com/anonyoneop_/"
-                                        class="flex items-center space-x-3 hover:text-sky-400 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
-                                        </svg>
-                                        <span>Instagram</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="w-10/12 m-auto  mt-16 space-y-6 sm:space-y-8 text-center sm:text-left sm:w-5/12 sm:mt-auto">
-                            <span class="block text-gray-300 text-sm sm:text-base">We change the way you study </span>
-
-                            <span class="block text-gray-300 text-sm sm:text-base">DeCram AI &copy; 2024</span>
-
-
-
-                            <span class="block text-gray-300 text-sm sm:text-base">Need help? <a href="mailto:guluguluemployee123@gmail.com"
-                                    class="font-semibold text-white">
-                                    Email Us</a></span>
-                        </div>
-                    </div>
+                <div class="flex-grow min-h-[22vh]">
+                  <h2 class="text-xl title-font font-medium mb-3">
+                    Custom Worksheet Generation
+                  </h2>
+                  <p class="leading-relaxed text-sm text-justify">
+                    Create personalized worksheets tailored to your curriculum
+                    and learning needs. Our AI analyzes your requirements and
+                    generates engaging practice materials that help reinforce
+                    your understanding.
+                  </p>
                 </div>
+              </div>
             </div>
-            <div aria-hidden="true" class="absolute h-full inset-0 flex items-center">
-                <div aria-hidden="true"
-                    class="bg-layers bg-scale w-56 h-56 m-auto blur-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full md:w-[30rem] md:h-[30rem] md:blur-3xl">
+          </div>
+          <div
+            class="p-4 sm:p-6 md:p-10 w-full md:w-1/3 md:mb-0 mb-6 flex flex-col"
+          >
+            <div class="pattern-dots-md gray-light">
+              <div
+                class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6"
+              >
+                <div
+                  class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-5 flex-shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
                 </div>
+                <div class="flex-grow min-h-[22vh]">
+                  <h2 class="text-xl title-font font-medium mb-3">
+                    DeCram Learn
+                  </h2>
+                  <p class="leading-relaxed text-sm text-justify">
+                    DeCram Learn helps students master concepts quickly and
+                    efficiently, focusing on deep understanding over cramming.
+                    Whether for exams or exploring new topics, our platform
+                    makes learning engaging, effective, and enjoyable.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div aria-hidden="true" class="absolute inset-0 w-full h-full bg-[#020314] opacity-80"></div>
-        </footer>
+          </div>
+          <div
+            class="p-4 sm:p-6 md:p-10 w-full md:w-1/3 md:mb-0 mb-6 flex flex-col"
+          >
+            <div class="pattern-dots-md gray-light">
+              <div
+                class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6"
+              >
+                <div
+                  class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 mb-5 flex-shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-grow min-h-[22vh]">
+                  <h2 class="text-xl title-font font-medium mb-3">
+                    AI-Powered Doubt Resolution
+                  </h2>
+                  <p class="leading-relaxed text-sm text-justify">
+                    Get instant answers to your academic questions with our AI
+                    tutor. Available 24/7, our system provides clear
+                    explanations and step-by-step solutions to help you
+                    understand complex concepts.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    </div>
+    <!-- Learn More Section -->
+    <section id="learn-more" class="bg-gray-900 text-white py-16">
+      <div class="max-w-6xl mx-auto px-5">
+        <h2 class="demo1 text-4xl font-bold mb-8 text-center">
+          Why Choose DeCram AI?
+        </h2>
+        <div class="demo1 grid md:grid-cols-2 gap-8">
+          <div
+            class="relative p-[3px] rounded-lg hover:scale-105 transition-transform duration-300"
+          >
+            <!-- Animated Border Effect -->
+            <div
+              class="absolute inset-0 rounded-lg bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-border"
+            ></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <!-- Card Content -->
+            <div
+              class="relative z-10 bg-gray-800 p-6 rounded-lg bg-gradient-radial from-gray-900 via-gray-800 to-gray-700"
+            >
+              <h3 class="text-xl font-semibold mb-4 text-white">
+                Personalized Learning Experience
+              </h3>
+              <p class="text-gray-300">
+                Our AI adapts to your learning style and pace, ensuring you get
+                the most out of every study session. With personalized feedback
+                and recommendations, you'll see improvement in no time.
+              </p>
+              <ul class="mt-4 space-y-2 text-gray-300">
+                <li>• Adaptive learning algorithms</li>
+                <li>• Custom difficulty levels</li>
+                <li>• Progress tracking</li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="relative p-[3px] rounded-lg hover:scale-105 transition-transform duration-300"
+          >
+            <!-- Animated Border -->
+            <div
+              class="absolute inset-0 rounded-lg bg-gradient-to-r from-red-500 via-green-500 to-blue-500 bg-[length:300%_300%] animate-border-spin"
+            ></div>
+
+            <!-- Card Content -->
+            <div
+              class="relative z-10 bg-gray-800 p-6 rounded-lg bg-gradient-radial from-gray-900 via-gray-800 to-gray-700"
+            >
+              <h3 class="text-xl font-semibold mb-4 text-white">
+                Comprehensive Support
+              </h3>
+              <p class="text-gray-300">
+                From worksheet generation to doubt resolution, we provide
+                end-to-end support for your academic journey. Our AI is
+                constantly learning and improving to better serve your needs.
+              </p>
+              <ul class="mt-4 space-y-2 text-gray-300">
+                <li>• 24/7 AI assistance</li>
+                <li>• Multi-subject support</li>
+                <li>• Regular content updates</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 text-center">
+          <h3 class="demo1 text-2xl font-semibold mb-6">
+            Ready to Transform Your Learning?
+          </h3>
+          <a
+            href="http://localhost:5173"
+            class="demo1 inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Start Learning Now
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="relative py-12 sm:py-16 md:py-20 flex flex-col items-center bg-cyan-900 overflow-hidden"
+    >
+      <div
+        class="demo1 footer1 relative z-[1] container m-auto px-4 sm:px-6 md:px-12"
+      >
+        <div class="m-auto md:w-10/12 lg:w-8/12 xl:w-6/12">
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between md:flex-nowrap gap-8"
+          >
+            <div
+              class="w-full space-x-4 sm:space-x-8 flex justify-center text-gray-300 sm:w-7/12 md:justify-start"
+            >
+              <ul role="list" class="space-y-8">
+                <li>
+                  <a
+                    href="https://github.com/und3f1n3dcoder"
+                    class="flex items-center space-x-3 hover:text-sky-400 transition"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      class="w-5"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                      />
+                    </svg>
+                    <span>Github</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://x.com/elonmusk"
+                    class="flex items-center space-x-3 hover:text-sky-400 transition"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      class="w-5"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+                      />
+                    </svg>
+                    <span>Twitter</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/@anonyone_op"
+                    class="flex items-center space-x-3 hover:text-sky-400 transition"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      class="w-5"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+                      />
+                    </svg>
+                    <span>YouTube</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/anonyoneop_/"
+                    class="flex items-center space-x-3 hover:text-sky-400 transition"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      class="w-5"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                      />
+                    </svg>
+                    <span>Instagram</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="w-10/12 m-auto mt-16 space-y-6 sm:space-y-8 text-center sm:text-left sm:w-5/12 sm:mt-auto"
+            >
+              <span class="block text-gray-300 text-sm sm:text-base"
+                >We change the way you study
+              </span>
+              <span class="block text-gray-300 text-sm sm:text-base"
+                >DeCram AI &copy; 2024</span
+              >
+              <span class="block text-gray-300 text-sm sm:text-base"
+                >Need help?
+                <a
+                  href="mailto:guluguluemployee123@gmail.com"
+                  class="font-semibold text-white"
+                >
+                  Email Us</a
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" class="absolute h-full inset-0 flex items-center">
+        <div
+          aria-hidden="true"
+          class="bg-layers bg-scale w-56 h-56 m-auto blur-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full md:w-[30rem] md:h-[30rem] md:blur-3xl"
+        ></div>
+      </div>
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full bg-[#020314] opacity-80"
+      ></div>
+    </footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="app.js"></script>
-
-</body>
-
+  </body>
 </html>

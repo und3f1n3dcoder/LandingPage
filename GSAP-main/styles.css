@@ -9,6 +9,7 @@ body {
   
 .demo1{
   opacity: 0;
+  font-family: Montserrat';
 }
 .bg-layers {
   -webkit-animation: filter-animation 4s infinite;
@@ -83,4 +84,8 @@ body {
 .bg-layers,
 .pattern-dots-md {
   transition: all 0.3s ease-in-out;
+}
+
+.hawk-tuah{
+  z-index: 1
 }

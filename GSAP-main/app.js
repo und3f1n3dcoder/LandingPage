@@ -1,78 +1,67 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// Mobile menu toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuOpenIcon = document.getElementById('menu-open');
+const menuCloseIcon = document.getElementById('menu-close');
 
-// gsap.to(".square", {
-//   x: 500,
-//   duration: 3,
-//   scrollTrigger: {
-//     trigger: ".square",
-//     start: "top 50%", //pixels
-//     markers: true,
-//     // toggleClass: "red",
-//   },
-// });
-// gsap.to(".square", {
-//   duration: 2,
-//   x: 300,
-//   scale: 1.5,
-//   rotation: 180,
-//   backgroundColor: "#3498db",
-//   ease: "elastic",
-//   delay: 1,
-//   repeat: -1,
-//   yoyo: true,
-//   onComplete: () => console.log("Animation complete!"),
-//   onUpdate: () => console.log("Updating..."),
-//   onStart: () => console.log("Animation started!"),
-// });
-
-gsap.to(".hawk-tuah", {
-  opacity: 1,
-  duration: 15,
-  repeat: -1,
-  y: -100,
-  x: Math.random() * 100 - 50,
-  ease: "bounce",
-  stagger: 1,
-})
-
-gsap.from(".demo", {
-  opacity: 0,
-  duration: 1.5,
-  y: -100,
-  stagger: 0.5,
-  scale: 1.2,
-  ease: "circ",
-  skewX: 20,
-  skewY: 20,
-  rotateX: 90,
+mobileMenuButton.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('hidden');
+    if (isOpen) {
+        mobileMenu.classList.remove('hidden');
+        menuOpenIcon.classList.add('hidden');
+        menuCloseIcon.classList.remove('hidden');
+    } else {
+        mobileMenu.classList.add('hidden');
+        menuOpenIcon.classList.remove('hidden');
+        menuCloseIcon.classList.add('hidden');
+    }
 });
 
-gsap.to(".demo1", {
-  scrollTrigger: {
-    trigger: ".demo1",
-    start: "top 70%",
-    // markers: true,
-  },
-  opacity: 1,
-  duration: 1.5,
-  // y: 100,
-  stagger: 0.5,
-  scale: 1.2,
-  ease: "circ",
+// Animations
+gsap.to(".hawk-tuah", {
+    opacity: 0.6,
+    duration: 5,
+    yoyo:true,
+    y: -100,
+    x: Math.random() * 100 - 50,
+    ease: "bounce",
+    stagger: 1,
+});
+
+gsap.from(".demo", {
+    opacity: 0,
+    duration: 1.5,
+    y: -100,
+    stagger: 0.5,
+    scale: 1.2,
+    ease: "circ",
+    skewX: 20,
+    skewY: 20,
+    rotateX: 90,
+});
+
+gsap.from(".demo1", {
+    scrollTrigger: {
+        trigger: ".demo1",
+        start: "top 70%",
+    },
+    opacity: 0,
+    duration: 1.5,
+    stagger: 0.5,
+    scale: 1,
+    ease: "circ",
 });
 
 gsap.to(".footer1", {
-  scrollTrigger: {
-    trigger: ".footer1",
-    start: "top 80%",
-    // markers: true,
-  },
-  opacity: 1,
-  duration: 1.5,
-  // y: 100,
-  stagger: 0.5,
-  scale: 1.2,
-  ease: "circ",
+    scrollTrigger: {
+        trigger: ".footer1",
+        start: "top 80%",
+    },
+    opacity: 1,
+    duration: 1.5,
+    stagger: 0.5,
+    scale: 1,
+    ease: "circ",
 });
-
